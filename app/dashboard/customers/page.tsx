@@ -1,6 +1,12 @@
 import { fetchFilteredCustomers } from '@/app/lib/data'
 import CustomersTable from '@/app/ui/customers/table'
 
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Customers'
+}
+
 type Props = {
   searchParams?: Promise<{
     query?: string

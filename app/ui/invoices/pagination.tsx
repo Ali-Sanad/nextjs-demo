@@ -49,7 +49,7 @@ export default function Pagination({
 
             return (
               <PaginationNumber
-                key={page}
+                key={`${page}-${index}`}
                 href={createPageURL(page)}
                 page={page}
                 position={position}
