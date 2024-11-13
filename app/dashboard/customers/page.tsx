@@ -8,7 +8,7 @@ type Props = {
   }>
 }
 
-export default async function Page(props: Props) {
+export default async function CustomersPage(props: Props) {
   const searchParams = await props.searchParams
   const query = searchParams?.query || ''
 

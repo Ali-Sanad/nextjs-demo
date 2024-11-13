@@ -7,7 +7,7 @@ type Props = {
   params: Promise<{ id: string }>
 }
 
-export default async function Page(props: Props) {
+export default async function EditInvoicePage(props: Props) {
   const params = await props.params
   const invoiceId = params.id
 
