@@ -11,7 +11,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { Button } from '@/app/ui/button'
 import { createInvoice, type State } from '@/app/lib/actions'
-import FormFieldError from '@/app/ui/invoices/form-field-error'
+import FormFieldError from '@/app/ui/form-field-error'
 
 export default function Form({
   customers
@@ -19,7 +19,10 @@ export default function Form({
   customers: CustomerField[]
 }) {
   const initialState: State = { message: null, errors: {} }
-  const [state, formAction] = useActionState(createInvoice, initialState)
+  const [state, formAction, isPending] = useActionState(
+    createInvoice,
+    initialState
+  )
 
   return (
     <form action={formAction}>
@@ -151,7 +154,9 @@ export default function Form({
           Cancel
         </Link>
 
-        <Button type='submit'>Create Invoice</Button>
+        <Button type='submit' aria-disabled={isPending}>
+          Create Invoice
+        </Button>
       </div>
     </form>
   )

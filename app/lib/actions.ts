@@ -6,6 +6,8 @@ import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 import { signIn } from '@/auth'
 import { AuthError } from 'next-auth'
+import bcrypt from 'bcrypt'
+import type { User } from '@/app/lib/definitions'
 
 export type State = {
   errors?: {
@@ -127,6 +129,16 @@ export async function deleteInvoice(id: string) {
   }
 }
 
+export async function getUser(email: string): Promise<User | undefined> {
+  try {
+    const user = await sql<User>`SELECT * FROM users WHERE email=${email}`
+    return user.rows[0]
+  } catch (error) {
+    console.error('Failed to fetch user:', error)
+    throw new Error('Failed to fetch user.')
+  }
+}
+
 export async function authenticate(
   prevState: string | undefined,
   formData: FormData
@@ -144,4 +156,61 @@ export async function authenticate(
     }
     throw error
   }
+}
+
+const RegisterFormSchema = z.object({
+  name: z.string().min(1, { message: 'Please add name.' }),
+  email: z.string().email({ message: 'Invalid email address.' }),
+  password: z
+    .string()
+    .min(6, { message: 'Password must be at least 6 characters long.' })
+})
+export type RegisterFormState = {
+  errors?: {
+    name?: string[]
+    email?: string[]
+    password?: string[]
+  }
+  message?: string | null
+}
+
+export async function register(
+  prevState: RegisterFormState,
+  formData: FormData
+) {
+  const parsedCredentials = RegisterFormSchema.safeParse({
+    name: formData.get('name'),
+    email: formData.get('email'),
+    password: formData.get('password')
+  })
+
+  if (!parsedCredentials.success) {
+    return {
+      errors: parsedCredentials.error.flatten().fieldErrors
+    }
+  }
+
+  const { name, email, password } = parsedCredentials.data
+  const user = await getUser(email)
+
+  if (user) {
+    return {
+      message:
+        'User already exist, please go to login page and verify your credentials'
+    }
+  }
+
+  const hashedPassword = await bcrypt.hash(password, 10)
+
+  // Add new user to the users table in the database
+  try {
+    await sql`INSERT INTO users (name, email, password)
+              VALUES (${name}, ${email}, ${hashedPassword})`
+  } catch (error) {
+    return {
+      message: 'Database Error: Failed to create user.'
+    }
+  }
+
+  redirect('/login')
 }

@@ -11,7 +11,7 @@ import Link from 'next/link'
 import { Button } from '@/app/ui/button'
 import { type State, updateInvoice } from '@/app/lib/actions'
 import { useActionState } from 'react'
-import FormFieldError from '@/app/ui/invoices/form-field-error'
+import FormFieldError from '@/app/ui/form-field-error'
 
 export default function EditInvoiceForm({
   invoice,
@@ -22,7 +22,7 @@ export default function EditInvoiceForm({
 }) {
   const initialState: State = { message: null, errors: {} }
 
-  const [state, formAction] = useActionState(
+  const [state, formAction, isPending] = useActionState(
     (prevState: State, formData: FormData) =>
       updateInvoice(prevState, formData, invoice.id),
     initialState
@@ -160,7 +160,9 @@ export default function EditInvoiceForm({
           Cancel
         </Link>
 
-        <Button type='submit'>Edit Invoice</Button>
+        <Button type='submit' aria-disabled={isPending}>
+          Edit Invoice
+        </Button>
       </div>
     </form>
   )
