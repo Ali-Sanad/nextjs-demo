@@ -1,14 +1,79 @@
-## Next.js 15 Demo app based on the [docs](https://nextjs.org/learn/dashboard-app)
+# Next.js 15 Demo app based on the [docs](https://nextjs.org/learn/dashboard-app)
 
-#### Overview
+## Technologies Used
 
-- Styling: The different ways to style your application in Next.js.
-- Optimizations: How to optimize images, links, and fonts.
-- Routing: How to create nested layouts and pages using file-system routing.
-- Data Fetching: How to set up a database on Vercel, and best practices for fetching and streaming.
-- Search and Pagination: How to implement search and pagination using URL Search Params.
-- Mutating Data: How to mutate data using React Server Actions, and revalidate the Next.js cache.
-- Error Handling: How to handle general and 404 not found errors.
-- Form Validation and Accessibility: How to do server-side form validation and tips for improving accessibility.
-- Authentication: How to add authentication to your application using NextAuth.js and Middleware.
-- Metadata: How to add metadata and prepare your application for social sharing.
+- **Next.js**
+- **TypeScript**
+- **Vercel**
+- **Tailwind CSS**
+- **NextAuth.js**
+- **Zod**
+
+---
+
+## Project Features
+
+- **Styling**: Tailwind CSS for responsive styling.
+- **Optimizations**: Image, link, and font optimizations.
+- **Routing**: Nested layouts and file-based routing.
+- **Data Fetching**: Vercel-hosted Postgres setup with streaming.
+- **Search & Pagination**: URL-based search and pagination.
+- **Data Mutation**: React Server Actions with cache revalidation.
+- **Error Handling**: Custom error and 404 pages.
+- **Form Validation & Accessibility**: Server-side validation and accessibility tips.
+- **Authentication**: NextAuth.js with middleware support.
+- **Metadata**: SEO and social sharing metadata setup.
+
+---
+
+## Installation Guide
+
+To set up this project, ensure you have `pnpm` installed. Run the following commands to install dependencies and start the development server.
+
+### Prerequisites
+
+- **Node.js** and **pnpm**
+
+### Installation Steps
+
+1. **Clone the repository**:
+
+   ```bash
+   git clone https://github.com/Ali-Sanad/nextjs-demo
+   cd nextjs-demo
+   ```
+
+2. **Install dependencies**:
+
+   ```bash
+   pnpm install
+   ```
+
+3. **Environment Variables**:
+   Configure the required environment variables for **Vercel**, **Postgres**, and **Auth.js** in a `.env` file, example of env variables can be found inside `.env.sample`
+
+4. **Run the Development Server**:
+   ```bash
+   pnpm dev
+   ```
+
+### Build & Run
+
+- **Build** the project:
+
+  ```bash
+  pnpm build
+  ```
+
+- **Start** the production server:
+
+  ```bash
+  pnpm start
+  ```
+
+- **Lint** the codebase:
+  ```bash
+  pnpm lint
+  ```
+
+---
