@@ -12,6 +12,7 @@ import { useActionState } from 'react'
 import { register, type RegisterFormState } from '@/app/lib/actions'
 import FormFieldError from '@/app/ui/form-field-error'
 import Link from 'next/link'
+import { ROUTE_PATHS } from '@/app/lib/constants'
 
 export default function LoginForm() {
   const initialState: RegisterFormState = { message: null, errors: {} }
@@ -117,7 +118,7 @@ export default function LoginForm() {
         <div className='mt-4 flex items-center gap-1'>
           <p>Already have an account ?</p>
 
-          <Link href='/login' className='text-blue-500'>
+          <Link href={ROUTE_PATHS.login} className='text-blue-500'>
             Login
           </Link>
         </div>

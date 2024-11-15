@@ -3,6 +3,7 @@ import Breadcrumbs from '@/app/ui/invoices/breadcrumbs'
 import { fetchCustomers, fetchInvoiceById } from '@/app/lib/data'
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
+import { ROUTE_PATHS } from '@/app/lib/constants'
 
 export const metadata: Metadata = {
   title: 'Edit Invoice'
@@ -29,10 +30,10 @@ export default async function EditInvoicePage(props: Props) {
     <main>
       <Breadcrumbs
         breadcrumbs={[
-          { label: 'Invoices', href: '/dashboard/invoices' },
+          { label: 'Invoices', href: ROUTE_PATHS.invoices },
           {
             label: 'Edit Invoice',
-            href: `/dashboard/invoices/${invoiceId}/edit`,
+            href: `${ROUTE_PATHS.invoices}/${invoiceId}/edit`,
             active: true
           }
         ]}

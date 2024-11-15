@@ -1,16 +1,17 @@
 'use client'
 
-import { lusitana } from '@/app/ui/fonts'
+import { useActionState } from 'react'
+import Link from 'next/link'
 import {
   AtSymbolIcon,
   KeyIcon,
   ExclamationCircleIcon
 } from '@heroicons/react/24/outline'
+import { lusitana } from '@/app/ui/fonts'
 import { ArrowRightIcon } from '@heroicons/react/20/solid'
-import { Button } from './button'
-import { useActionState } from 'react'
 import { authenticate } from '@/app/lib/actions'
-import Link from 'next/link'
+import { ROUTE_PATHS } from '@/app/lib/constants'
+import { Button } from './button'
 
 export default function LoginForm() {
   const [errorMessage, formAction, isPending] = useActionState(
@@ -89,7 +90,7 @@ export default function LoginForm() {
         <div className='mt-2 flex items-center gap-1'>
           <p>Do not have an account ?</p>
 
-          <Link href='/register' className='text-blue-500'>
+          <Link href={ROUTE_PATHS.register} className='text-blue-500'>
             Register
           </Link>
         </div>
